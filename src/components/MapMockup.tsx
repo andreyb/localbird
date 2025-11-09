@@ -1,15 +1,17 @@
+import { useState } from "react";
 import { Dumbbell, ShoppingCart, GraduationCap, Home, Briefcase, ChevronRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 const MapMockup = () => {
+  const [filters, setFilters] = useState({ fitness: true, groceries: true, schools: false });
   return <div className="w-full bg-card rounded-3xl overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] border border-border/50">
       {/* Top Search Bar */}
       <div className="w-full bg-card border-b border-border/30 p-4 md:p-6">
         <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
-          <Input placeholder="Paste a listing address or URL" className="flex-1 h-12 px-4 rounded-full border-2 border-input bg-background text-foreground placeholder:text-muted-foreground" />
-          <Button size="lg" className="sm:w-auto whitespace-nowrap rounded-full">
+          <Input placeholder="Enter listing address" className="flex-1 h-12 px-4 rounded-full border-2 border-input bg-background text-foreground placeholder:text-muted-foreground" />
+          <Button size="lg" className="sm:w-auto whitespace-nowrap rounded-full" onClick={() => window.open('https://hoods.localbird.ch', '_blank')}>
             Explore nearby
           </Button>
         </div>
@@ -25,20 +27,20 @@ const MapMockup = () => {
           </h3>
           
           <div className="space-y-2.5 mb-5">
-            {/* Fitness - Active */}
-            <button className="w-full flex items-center gap-3 px-4 py-2.5 rounded-full bg-primary text-primary-foreground shadow-md transition-all hover:shadow-lg">
+            {/* Fitness */}
+            <button onClick={() => setFilters(prev => ({ ...prev, fitness: !prev.fitness }))} className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-full shadow-md transition-all hover:shadow-lg ${filters.fitness ? 'bg-primary text-primary-foreground' : 'bg-background border-2 border-secondary text-secondary'}`}>
               <Dumbbell className="h-4 w-4" />
               <span className="font-medium text-sm">Fitness</span>
             </button>
 
-            {/* Groceries - Active */}
-            <button className="w-full flex items-center gap-3 px-4 py-2.5 rounded-full bg-primary text-primary-foreground shadow-md transition-all hover:shadow-lg">
+            {/* Groceries */}
+            <button onClick={() => setFilters(prev => ({ ...prev, groceries: !prev.groceries }))} className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-full shadow-md transition-all hover:shadow-lg ${filters.groceries ? 'bg-primary text-primary-foreground' : 'bg-background border-2 border-secondary text-secondary'}`}>
               <ShoppingCart className="h-4 w-4" />
               <span className="font-medium text-sm">Groceries</span>
             </button>
 
-            {/* Schools - Inactive */}
-            <button className="w-full flex items-center gap-3 px-4 py-2.5 rounded-full bg-background border-2 border-secondary text-secondary shadow-sm transition-all hover:bg-secondary/5">
+            {/* Schools */}
+            <button onClick={() => setFilters(prev => ({ ...prev, schools: !prev.schools }))} className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-full shadow-md transition-all hover:shadow-lg ${filters.schools ? 'bg-primary text-primary-foreground' : 'bg-background border-2 border-secondary text-secondary'}`}>
               <GraduationCap className="h-4 w-4" />
               <span className="font-medium text-sm">Schools</span>
             </button>
@@ -66,7 +68,7 @@ const MapMockup = () => {
         </div>
 
         {/* Right Side - CSS Map */}
-        <div className="flex-1 relative bg-gradient-to-br from-muted/30 to-muted/50 overflow-hidden">
+        <div className="flex-1 relative bg-gradient-to-br from-muted/30 to-muted/50 overflow-hidden cursor-pointer" onClick={() => window.open('https://hoods.localbird.ch', '_blank')}>
           {/* Grid Lines - Subtle street grid with reduced opacity */}
           <div className="absolute inset-0 opacity-30">
             {/* Vertical lines */}

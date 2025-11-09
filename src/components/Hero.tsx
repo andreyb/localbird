@@ -18,9 +18,9 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-center pt-6">
-          <Button size="lg" className="w-full sm:w-auto">Open the map<ArrowRight className="ml-2 h-5 w-5" />
+          <Button size="lg" className="w-full sm:w-auto" onClick={() => window.open('https://hoods.localbird.ch', '_blank')}>Open the map<ArrowRight className="ml-2 h-5 w-5" />
           </Button>
-          <Button size="lg" variant="outline" className="w-full sm:w-auto">
+          <Button size="lg" variant="outline" className="w-full sm:w-auto" onClick={() => window.location.href = 'mailto:localbirdch@gmail.com?subject=Localbird Lifetime Access&body=Hi there,%0A%0AI\'m interested in getting lifetime access to Localbird.%0A%0ABest regards,%0A[Your Name]'}>
             Get lifetime access
           </Button>
         </div>
